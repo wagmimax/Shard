@@ -1,5 +1,11 @@
-#include<shard.h>
+#include<shard.hpp>
 #include<iostream>
+
+std::filesystem::path getExecutablePath() {
+    char buffer[MAX_PATH];
+    GetModuleFileNameA(NULL, buffer, MAX_PATH);
+    return std::filesystem::path(buffer).parent_path();
+}
 
 void shard::handleCommand(args cmdArgs) {
     for(auto& command : commands) {
@@ -9,5 +15,5 @@ void shard::handleCommand(args cmdArgs) {
         }
     }
 
-    std::cout << "Invalid command" << std::endl;
+    std::cout << "Command not found" << std::endl;
 }

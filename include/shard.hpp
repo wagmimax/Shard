@@ -3,12 +3,15 @@
 #include<string>
 #include<array>
 #include<iostream>
+#include<windows.h>
+#include<filesystem>
+
+std::filesystem::path getExecutablePath();
 
 namespace shard {    
 
     using args = const std::vector<std::string>&;
 
-    void install(args);
     void config(args);
     void list(args);
 
@@ -18,9 +21,8 @@ namespace shard {
     };
 
     constexpr std::array commands = {
-        Command{"install", &install},
-        Command{"config", &config},
-        Command{"list", &list}
+        Command{"--config", &config},
+        Command{"--list", &list}
     };
 
     void handleCommand(args);

@@ -1,5 +1,5 @@
-#include<shard.h>
+#include<shard.hpp>
 
 void shard::list(args cmdArgs) {
-    std::cout << "Listing..." << std::endl;
+
 }
