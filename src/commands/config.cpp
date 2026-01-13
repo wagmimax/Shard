@@ -2,6 +2,7 @@
 #include<json.hpp>
 #include<fstream>
 
+//create and add a new command to config.json. new commands are automatically set to the current directory you are in
 static void setShardCommand(shard::args cmdArgs) {
 
     //cmdArgs[0] shard         
@@ -13,6 +14,7 @@ static void setShardCommand(shard::args cmdArgs) {
 
     if(cmdArgs.size() != 6 || cmdArgs[4] != "as") {
         std::cout << "shard --config set <name> as <command>" << std::endl;
+        return;
     }
 
     //load existing config json
@@ -38,6 +40,7 @@ static void setShardCommand(shard::args cmdArgs) {
     inFile.close();
 }
 
+//upon first time calling shard --config
 static void createConfigJson(std::filesystem::path path) {
     std::ofstream configJson(path / "config.json");
     std::cout << "Created Config File at " << path / "config.json" << std::endl;
@@ -48,7 +51,7 @@ static void createConfigJson(std::filesystem::path path) {
     configJson << json;
 }
 
-static constexpr std::array configCommands = {shard::Command{"set", }};
+static constexpr std::array configCommands = {shard::Command{"set", &setShardCommand}};
 
 void shard::config(args cmdArgs) {
 
