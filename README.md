@@ -7,10 +7,10 @@ Shard does not create a config file in your project, but rather in the same fold
 Shard has no bloat and is meant to be simple yet effective
 
 
-Eliminate the need to constantly type out verbose lines, and keep it hidden behind a shortcut. Here is an example:
+Eliminate the need to constantly type out verbose lines, and keep it hidden behind a shortcut. Here is an example:  
 shard --config set build as "cmake --build build --config Release"
 
-"cmake --build build --config Release" is now hidden behid this simple command:
+"cmake --build build --config Release" is now hidden behid this simple command:  
 shard build
 
 Now everytime you wake up and open your terminal, you are two words away from building your project. No extra files, no verbose commands, just simplicity.
