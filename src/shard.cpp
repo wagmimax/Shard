@@ -23,9 +23,7 @@ void shard::handleCommand(args cmdArgs) {
     }
 
     //we checked above if cmdArgs[1] is a shard command
-    //if are here, that means it is not. now check if 
-    //it is a user created command
-
+    //now check if it is a user created command
     if(!std::filesystem::exists(getExecutablePath() / "config.json")) {
         std::cout << "Must run \"shard --config\" first" << std::endl;
         return;
@@ -36,7 +34,7 @@ void shard::handleCommand(args cmdArgs) {
     inFile >> configJson;
 
     std::string currentDir = std::filesystem::current_path().string();
-    //TODO: add proper error handling and logging
+
     if(!configJson["directories"].contains(currentDir)) {
         std::cout << "This directory does not contain any commands";
         return;
