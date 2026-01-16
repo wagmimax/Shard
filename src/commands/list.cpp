@@ -11,6 +11,7 @@ void shard::list(args cmdArgs) {
     //incorrect usage
     if(cmdArgs.size() != 2 && cmdArgs.size() != 3 && cmdArgs[2] != "all") {
         std::cout << "shard --list <optional {all} flag>" << std::endl;
+        return;
     }
 
     if(!std::filesystem::exists(getExecutablePath() / "config.json")) {
@@ -31,20 +32,21 @@ void shard::list(args cmdArgs) {
             return;
         }
 
-        std::cout << std::left << std::setw(15) << "Name" 
-                  << std::left << std::setw(15) << "Command" << std::endl;
-        std::cout << "----------------------" << std::endl;
-
-        for(const auto& [key, value] : configJson["directories"][currentPath.string()].items()) {
-            std::cout << std::left << std::setw(15) << key
-                      << std::left << std::setw(15) << value.dump() << std::endl;
+        std::cout << std::endl;
+        for(const auto& [name, command] : configJson["directories"][currentPath.string()].items()) {
+            std::cout << std::left << std::setw(15) << name
+                      << std::left << std::setw(15) << command << std::endl;
         }
-
-
     }
-
-    
-
-
-    
+    else {
+        
+        for(const auto& [directory, items] : configJson["directories"].items()) {
+            std::cout << std::endl;
+            std::cout << directory << std::endl;
+            for(const auto& [name, command] : configJson["directories"][directory].items()) {
+                std::cout << std::left << std::setw(15) << name
+                          << std::left << std::setw(15) << command << std::endl;
+            }
+        }
+    }
 }

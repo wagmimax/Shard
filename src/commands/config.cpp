@@ -4,6 +4,9 @@
 
 //create and add a new command to config.json. new commands are automatically set to the current directory you are in
 static void setShardCommand(shard::args cmdArgs) {
+    //available commands:
+    //shard --config
+    //shard --config set <name> as <command>
 
     //cmdArgs[0] shard         
     //cmdArgs[1] --config                              all previous commands have checked
