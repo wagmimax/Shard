@@ -25,18 +25,28 @@ void shard::handleCommand(args cmdArgs) {
     //we checked above if cmdArgs[1] is a shard command
     //if are here, that means it is not. now check if 
     //it is a user created command
+
+    if(!std::filesystem::exists(getExecutablePath() / "config.json")) {
+        std::cout << "Must run \"shard --config\" first" << std::endl;
+        return;
+    }
+
     std::ifstream inFile(getExecutablePath() / "config.json");
     nlohmann::json configJson;
     inFile >> configJson;
 
     std::string currentDir = std::filesystem::current_path().string();
     //TODO: add proper error handling and logging
-    if(!configJson.contains("directories")) return;
-    if(!configJson["directories"].contains(currentDir)) return;
-    if(!configJson["directories"][currentDir].contains(cmdArgs[1])) return;
-
+    if(!configJson["directories"].contains(currentDir)) {
+        std::cout << "This directory does not contain any commands";
+        return;
+    }
+    else if(!configJson["directories"][currentDir].contains(cmdArgs[1])) {
+        std::cout << "This directory does not contain the command " << cmdArgs[1];
+        return;
+    } 
+    
+    //now that we made it through error handling, actually dispatch the command
     std::string dispatchedCommand = configJson["directories"][currentDir][cmdArgs[1]];
     std::system(dispatchedCommand.c_str());
-
-    std::cout << "Command not found" << std::endl;
 }
