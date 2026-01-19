@@ -76,7 +76,34 @@ static void deleteShardCommand(shard::args cmdArgs) {
 
 //delete directories and their commands if they no longer exist
 static void purgeShardCommands(shard::args cmdArgs) {
+    //mock command:
+    //shard --config purge
+    
+    if(cmdArgs.size() != 3) {
+        std::cout << "shard --config purge" << std::endl;
+        return;
+    }
 
+    //load config file
+    std::ifstream inFile(getExecutablePath() / "config.json");
+    nlohmann::json configJson;
+    inFile >> configJson;
+
+    //iterate over all directories, and check if they exist
+    std::cout << "\n";
+    for(auto& [directory, other] : configJson["directories"].items()) {
+        if(!std::filesystem::exists(directory)) {
+            std::cout << "Purged: " << directory << std::endl;
+            configJson["directories"].erase(directory);
+            
+        }
+    }
+
+    std::ofstream outFile(getExecutablePath() / "config.json", std::ios::trunc);
+    outFile << configJson.dump(4);
+
+    outFile.close();
+    inFile.close();
 }
 
 //upon first time calling shard --config

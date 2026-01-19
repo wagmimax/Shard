@@ -38,6 +38,7 @@ void shard::list(args cmdArgs) {
                       << std::left << std::setw(15) << command << std::endl;
         }
     }
+    //shard --list all
     else {
         
         for(const auto& [directory, items] : configJson["directories"].items()) {
