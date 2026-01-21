@@ -62,9 +62,16 @@ static void deleteShardCommand(shard::args cmdArgs) {
     nlohmann::json configJson;
     inFile >> configJson;
 
+    std::string currentDir = std::filesystem::current_path().string();
+
     //delete the command
     std::string command = cmdArgs[3];
-    configJson["directories"][std::filesystem::current_path().string()].erase(command);
+    configJson["directories"][currentDir].erase(command);
+
+    //check if directory no longer has commands
+    if(configJson["directories"][currentDir].empty()) {
+        configJson["directories"].erase(currentDir);
+    }
 
     //truncate and write to config.json
     std::ofstream outFile(getExecutablePath() / "config.json", std::ios::trunc);
