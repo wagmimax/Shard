@@ -17,4 +17,4 @@ Now everytime you wake up and open your terminal, you are two words away from bu
 
 Commands being local to your directory also means you can have shard commands with the same name in all your projects, each carrying out their own command without naming conflicts.
   
-Linux support coming soon.
+Windows and Linux supported.
