@@ -13,10 +13,6 @@ std::filesystem::path getExecutablePath() {
     char path[PATH_MAX];
     auto length = readlink("/proc/self/exe", path, PATH_MAX);
     path[length] = '\0';
-
-    std::cout << "\n\n===LINUX EXEC PATH==\n"
-	    << std::filesystem::path(path).parent_path() << "\n======\n\n";
-
     return std::filesystem::path(path).parent_path();
 
 #endif
