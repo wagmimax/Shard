@@ -16,3 +16,5 @@ shard build
 Now everytime you wake up and open your terminal, you are two words away from building your project. No extra files, no verbose commands, just simplicity.
 
 Commands being local to your directory also means you can have shard commands with the same name in all your projects, each carrying out their own command without naming conflicts.
+  
+Linux support coming soon.
