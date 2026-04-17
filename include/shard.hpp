@@ -1,10 +1,17 @@
 #pragma once
-#include<unordered_map>
+
 #include<string>
 #include<array>
+#include<vector>
 #include<iostream>
-#include<windows.h>
 #include<filesystem>
+
+#ifdef __WIN32
+#include<windows.h>
+#elif __linux__
+#include<unistd.h>
+#include<climits>
+#endif
 
 std::filesystem::path getExecutablePath();
 

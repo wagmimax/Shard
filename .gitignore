@@ -47,3 +47,6 @@ cmake_install.cmake
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# clangd
+.cache

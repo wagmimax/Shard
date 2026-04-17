@@ -11,7 +11,7 @@ int main(int argc, char* argv[]) {
         args.emplace_back(argv[i]);
     }
 
-    shard::handleCommand(args);
+    shard::handleCommand(args); 
 
     return 0;
 }
