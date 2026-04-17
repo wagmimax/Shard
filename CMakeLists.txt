@@ -21,6 +21,7 @@ set_target_properties(shard PROPERTIES
 
 # Configure
 #cmake -B build -G "Visual Studio 17 2022"
+#cmake -B build -G "MinGW Makefiles"
 #cmake -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
 
 # Build

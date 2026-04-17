@@ -27,6 +27,11 @@ void shard::handleCommand(args cmdArgs) {
     //cmdArgs[0] is always "shard"
     //cmdArgs[1] the command we want to listen to
 
+    if(cmdArgs.size() < 2) {
+        std::cout << "Usage: shard <command>\n";
+        return;
+    }
+
     //we check if cmdArgs[1] is a shard command (ie, --config)
     for(auto& command : commands) {
         if(command.name == cmdArgs[1]) {

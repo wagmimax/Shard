@@ -135,6 +135,10 @@ void shard::config(args cmdArgs) {
         createConfigJson(getExecutablePath());
     }
 
+    if(cmdArgs.size() < 3) {
+        return;
+    }
+
     for(auto& command : configCommands) {
         if(command.name == cmdArgs[2]) {
             command.function(cmdArgs);
